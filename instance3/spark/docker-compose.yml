@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  spark-worker-1:
+    image: apache/spark:3.4.2
+    container_name: spark-worker-2
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_WORKER_MEMORY=4g
+      - SPARK_WORKER_CORES=2
+      - SPARK_LOCAL_IP=0.0.0.0
+    entrypoint: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker"]
+    command: [
+      "spark://3.39.76.12:7077",
+      "--host", "0.0.0.0",
+      "--webui-port", "8081"
+    ]
+    restart: always
